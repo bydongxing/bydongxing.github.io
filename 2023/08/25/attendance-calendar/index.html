@@ -1,0 +1,814 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Xavier Dong">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="考勤日历组件::: tip员工考勤日历组件。::: 安装123npm install @zto&#x2F;zui-smart-component --registry&#x3D;http:&#x2F;&#x2F;npm.ztosys.comimport &amp;#123; AttendanceCalendar &amp;#125; from &amp;#x27;@zto&#x2F;zui-smart-component&amp;#x27;  使用123456789101112">
+<meta property="og:type" content="article">
+<meta property="og:title" content="attendance-calendar">
+<meta property="og:url" content="https://bydongxing.github.io/2023/08/25/attendance-calendar/index.html">
+<meta property="og:site_name" content="XavierDong&#39;s blog">
+<meta property="og:description" content="考勤日历组件::: tip员工考勤日历组件。::: 安装123npm install @zto&#x2F;zui-smart-component --registry&#x3D;http:&#x2F;&#x2F;npm.ztosys.comimport &amp;#123; AttendanceCalendar &amp;#125; from &amp;#x27;@zto&#x2F;zui-smart-component&amp;#x27;  使用123456789101112">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-25T09:17:15.000Z">
+<meta property="article:modified_time" content="2023-08-25T09:18:05.000Z">
+<meta property="article:author" content="Xavier Dong">
+<meta property="article:tag" content="原创">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>attendance-calendar - XavierDong&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"bydongxing.github.io","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>XavierDong&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="attendance-calendar"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-08-25 17:17" pubdate>
+          2023年8月25日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          19k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          157 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">attendance-calendar</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="考勤日历组件"><a href="#考勤日历组件" class="headerlink" title="考勤日历组件"></a>考勤日历组件</h2><p>::: tip<br>员工考勤日历组件。<br>:::</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install @zto/zui-smart-component --registry=http://npm.ztosys.com<br><br>import &#123; AttendanceCalendar &#125; from <span class="hljs-string">&#x27;@zto/zui-smart-component&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">v-loading</span>=<span class="hljs-string">&quot;loading&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;l-page l-page--flex l-page--stretch&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;l-page__content&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;content--padding l-page--flex&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">attendance-calendar</span> <span class="hljs-attr">:data</span>=<span class="hljs-string">&quot;attendanceData&quot;</span> @<span class="hljs-attr">month-change</span>=<span class="hljs-string">&quot;getAttendanceData&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">attendance-calendar</span>&gt;</span><br>      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">  <span class="hljs-keyword">import</span> moment <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;moment&#x27;</span></span><br><span class="language-javascript">  <span class="hljs-keyword">import</span> &#123; getAttendanceData &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/api/inventory&#x27;</span></span><br><span class="language-javascript">  <span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">AttendanceCalendar</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zto/zui-smart-component&#x27;</span></span><br><span class="language-javascript">  <span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;@zto/zui-smart-component/lib/theme-chalk/index.css&#x27;</span></span><br><span class="language-javascript"></span><br><span class="language-javascript">  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="language-javascript">    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;selfEvaluation&#x27;</span>,</span><br><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-attr">components</span>: &#123;</span><br><span class="language-javascript">      <span class="hljs-title class_">AttendanceCalendar</span></span><br><span class="language-javascript">    &#125;,</span><br><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">      <span class="hljs-keyword">return</span> &#123;</span><br><span class="language-javascript">        <span class="hljs-attr">attendanceData</span>: &#123;&#125;</span><br><span class="language-javascript">      &#125;</span><br><span class="language-javascript">    &#125;,</span><br><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-title function_">created</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getAttendanceData</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>())</span><br><span class="language-javascript">    &#125;,</span><br><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-attr">methods</span>: &#123;</span><br><span class="language-javascript">      <span class="hljs-title function_">getAttendanceData</span>(<span class="hljs-params">date</span>) &#123;</span><br><span class="language-javascript">        <span class="hljs-keyword">const</span> params = &#123;</span><br><span class="language-javascript">          <span class="hljs-attr">endDate</span>: <span class="hljs-title function_">moment</span>(date)</span><br><span class="language-javascript">            .<span class="hljs-title function_">endOf</span>(<span class="hljs-string">&#x27;month&#x27;</span>)</span><br><span class="language-javascript">            .<span class="hljs-title function_">valueOf</span>(),</span><br><span class="language-javascript">          <span class="hljs-attr">startDate</span>: <span class="hljs-title function_">moment</span>(date)</span><br><span class="language-javascript">            .<span class="hljs-title function_">startOf</span>(<span class="hljs-string">&#x27;month&#x27;</span>)</span><br><span class="language-javascript">            .<span class="hljs-title function_">valueOf</span>(),</span><br><span class="language-javascript">          <span class="hljs-attr">userId</span>: <span class="hljs-string">&#x27; &#x27;</span></span><br><span class="language-javascript">        &#125;</span><br><span class="language-javascript"></span><br><span class="language-javascript">        <span class="hljs-title function_">getAttendanceData</span>(params).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> &#123;</span><br><span class="language-javascript">          <span class="hljs-variable language_">this</span>.<span class="hljs-property">attendanceData</span> = res.<span class="hljs-property">result</span> || &#123;&#125;</span><br><span class="language-javascript">        &#125;)</span><br><span class="language-javascript">      &#125;</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">  &#125;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h3><p>:::demo</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">zsc-attendance-calendar</span> <span class="hljs-attr">:data</span>=<span class="hljs-string">&quot;attendanceData&quot;</span> @<span class="hljs-attr">month-change</span>=<span class="hljs-string">&quot;getAttendanceData&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="language-javascript">    <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">      <span class="hljs-keyword">return</span> &#123;</span><br><span class="language-javascript">        <span class="hljs-attr">attendanceData</span>: &#123;</span><br><span class="language-javascript">          <span class="hljs-string">&#x27;2022-07-01&#x27;</span>: &#123;</span><br><span class="language-javascript">            <span class="hljs-attr">details</span>: [],</span><br><span class="language-javascript">            <span class="hljs-attr">workTime</span>: <span class="hljs-string">&#x27;2021-07-01 08:44&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">offWorkTime</span>: <span class="hljs-string">&#x27;2021-07-01 20:03&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">scheduleDetails</span>: [<span class="hljs-string">&#x27;常白班总部弹性工时 08:30_17:30&#x27;</span>]</span><br><span class="language-javascript">          &#125;,</span><br><span class="language-javascript">          <span class="hljs-string">&#x27;2022-07-02&#x27;</span>: &#123;</span><br><span class="language-javascript">            <span class="hljs-attr">details</span>: [</span><br><span class="language-javascript">              &#123; <span class="hljs-attr">attendanceType</span>: <span class="hljs-string">&#x27;加班&#x27;</span>, <span class="hljs-attr">attendanceTypeDesValue</span>: <span class="hljs-string">&#x27;8:00&#x27;</span>, <span class="hljs-attr">attendanceTypeDes</span>: <span class="hljs-string">&#x27;7-12月休息日加班转调休&#x27;</span> &#125;</span><br><span class="language-javascript">            ],</span><br><span class="language-javascript">            <span class="hljs-attr">workTime</span>: <span class="hljs-string">&#x27;2021-07-02 08:46&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">offWorkTime</span>: <span class="hljs-string">&#x27;2021-07-02 19:02&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">scheduleDetails</span>: [<span class="hljs-string">&#x27;常白班总部弹性工时 08:30_17:30&#x27;</span>]</span><br><span class="language-javascript">          &#125;,</span><br><span class="language-javascript">          <span class="hljs-string">&#x27;2022-07-04&#x27;</span>: &#123;</span><br><span class="language-javascript">            <span class="hljs-attr">details</span>: [&#123; <span class="hljs-attr">attendanceType</span>: <span class="hljs-string">&#x27;外勤&#x27;</span>, <span class="hljs-attr">attendanceTypeDesValue</span>: <span class="hljs-string">&#x27;外勤&#x27;</span>, <span class="hljs-attr">attendanceTypeDes</span>: <span class="hljs-string">&#x27;外勤&#x27;</span> &#125;],</span><br><span class="language-javascript">            <span class="hljs-attr">workTime</span>: <span class="hljs-string">&#x27;2021-07-04 08:46&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">offWorkTime</span>: <span class="hljs-string">&#x27;2021-07-04 19:02&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">scheduleDetails</span>: [<span class="hljs-string">&#x27;常白班总部弹性工时 08:30_17:30&#x27;</span>]</span><br><span class="language-javascript">          &#125;,</span><br><span class="language-javascript">          <span class="hljs-string">&#x27;2022-07-05&#x27;</span>: &#123;</span><br><span class="language-javascript">            <span class="hljs-attr">details</span>: [</span><br><span class="language-javascript">              &#123; <span class="hljs-attr">attendanceType</span>: <span class="hljs-string">&#x27;缺日志&#x27;</span>, <span class="hljs-attr">attendanceTypeDesValue</span>: <span class="hljs-string">&#x27;缺日志&#x27;</span>, <span class="hljs-attr">attendanceTypeDes</span>: <span class="hljs-string">&#x27;缺日志(点击补日志)&#x27;</span> &#125;</span><br><span class="language-javascript">            ],</span><br><span class="language-javascript">            <span class="hljs-attr">workTime</span>: <span class="hljs-string">&#x27;2021-07-05 08:46&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">offWorkTime</span>: <span class="hljs-string">&#x27;2021-07-05 19:02&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">scheduleDetails</span>: [<span class="hljs-string">&#x27;常白班总部弹性工时 08:30_17:30&#x27;</span>]</span><br><span class="language-javascript">          &#125;,</span><br><span class="language-javascript">          <span class="hljs-string">&#x27;2022-07-06&#x27;</span>: &#123;</span><br><span class="language-javascript">            <span class="hljs-attr">details</span>: [&#123; <span class="hljs-attr">attendanceType</span>: <span class="hljs-string">&#x27;休假&#x27;</span>, <span class="hljs-attr">attendanceTypeDesValue</span>: <span class="hljs-string">&#x27;8:00&#x27;</span>, <span class="hljs-attr">attendanceTypeDes</span>: <span class="hljs-string">&#x27;L-前半年调休假&#x27;</span> &#125;],</span><br><span class="language-javascript">            <span class="hljs-attr">workTime</span>: <span class="hljs-string">&#x27;2021-07-06 08:46&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">offWorkTime</span>: <span class="hljs-string">&#x27;2021-07-06 19:02&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">scheduleDetails</span>: [<span class="hljs-string">&#x27;常白班总部弹性工时 08:30_17:30&#x27;</span>]</span><br><span class="language-javascript">          &#125;,</span><br><span class="language-javascript">          <span class="hljs-string">&#x27;2022-07-07&#x27;</span>: &#123;</span><br><span class="language-javascript">            <span class="hljs-attr">details</span>: [&#123; <span class="hljs-attr">attendanceType</span>: <span class="hljs-string">&#x27;补卡&#x27;</span>, <span class="hljs-attr">attendanceTypeDesValue</span>: <span class="hljs-string">&#x27;上班卡&#x27;</span>, <span class="hljs-attr">attendanceTypeDes</span>: <span class="hljs-string">&#x27;补卡&#x27;</span> &#125;],</span><br><span class="language-javascript">            <span class="hljs-attr">workTime</span>: <span class="hljs-string">&#x27;2021-07-07 08:46&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">offWorkTime</span>: <span class="hljs-string">&#x27;2021-07-07 19:02&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">scheduleDetails</span>: [<span class="hljs-string">&#x27;常白班总部弹性工时 08:30_17:30&#x27;</span>]</span><br><span class="language-javascript">          &#125;,</span><br><span class="language-javascript">          <span class="hljs-string">&#x27;2022-07-08&#x27;</span>: &#123;</span><br><span class="language-javascript">            <span class="hljs-attr">details</span>: [&#123; <span class="hljs-attr">attendanceType</span>: <span class="hljs-string">&#x27;缺卡&#x27;</span>, <span class="hljs-attr">attendanceTypeDesValue</span>: <span class="hljs-string">&#x27;上班卡&#x27;</span>, <span class="hljs-attr">attendanceTypeDes</span>: <span class="hljs-string">&#x27;缺卡&#x27;</span> &#125;],</span><br><span class="language-javascript">            <span class="hljs-attr">workTime</span>: <span class="hljs-string">&#x27;undefined&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">offWorkTime</span>: <span class="hljs-string">&#x27;2021-07-08 19:02&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">scheduleDetails</span>: [<span class="hljs-string">&#x27;常白班总部弹性工时 08:30_17:30&#x27;</span>]</span><br><span class="language-javascript">          &#125;,</span><br><span class="language-javascript">          <span class="hljs-string">&#x27;2022-07-09&#x27;</span>: &#123;</span><br><span class="language-javascript">            <span class="hljs-attr">details</span>: [&#123; <span class="hljs-attr">attendanceType</span>: <span class="hljs-string">&#x27;迟到&#x27;</span>, <span class="hljs-attr">attendanceTypeDesValue</span>: <span class="hljs-string">&#x27;上班卡&#x27;</span>, <span class="hljs-attr">attendanceTypeDes</span>: <span class="hljs-string">&#x27;迟到&#x27;</span> &#125;],</span><br><span class="language-javascript">            <span class="hljs-attr">workTime</span>: <span class="hljs-string">&#x27;2021-07-09 09:46&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">offWorkTime</span>: <span class="hljs-string">&#x27;2021-07-09 19:02&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">scheduleDetails</span>: [<span class="hljs-string">&#x27;常白班总部弹性工时 08:30_17:30&#x27;</span>]</span><br><span class="language-javascript">          &#125;,</span><br><span class="language-javascript">          <span class="hljs-string">&#x27;2022-07-11&#x27;</span>: &#123;</span><br><span class="language-javascript">            <span class="hljs-attr">details</span>: [&#123; <span class="hljs-attr">attendanceType</span>: <span class="hljs-string">&#x27;早退&#x27;</span>, <span class="hljs-attr">attendanceTypeDesValue</span>: <span class="hljs-string">&#x27;下班卡&#x27;</span>, <span class="hljs-attr">attendanceTypeDes</span>: <span class="hljs-string">&#x27;早退&#x27;</span> &#125;],</span><br><span class="language-javascript">            <span class="hljs-attr">workTime</span>: <span class="hljs-string">&#x27;2021-07-11 08:46&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">offWorkTime</span>: <span class="hljs-string">&#x27;2021-07-11 17:02&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">scheduleDetails</span>: [<span class="hljs-string">&#x27;常白班总部弹性工时 08:30_17:30&#x27;</span>]</span><br><span class="language-javascript">          &#125;</span><br><span class="language-javascript">        &#125;</span><br><span class="language-javascript">      &#125;</span><br><span class="language-javascript">    &#125;,</span><br><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-attr">methods</span>: &#123;</span><br><span class="language-javascript">      <span class="hljs-title function_">getAttendanceData</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">        <span class="hljs-comment">// setTimeout(() =&gt; &#123;</span></span><br><span class="language-javascript">        <span class="hljs-comment">//   this.attendanceData = &#123;</span></span><br><span class="language-javascript">        <span class="hljs-comment">//     &#x27;2022-07-02&#x27;: &#123;</span></span><br><span class="language-javascript">        <span class="hljs-comment">//       details: [],</span></span><br><span class="language-javascript">        <span class="hljs-comment">//       workTime: &#x27;2021-07-01 08:44&#x27;,</span></span><br><span class="language-javascript">        <span class="hljs-comment">//       offWorkTime: &#x27;2021-07-01 20:03&#x27;,</span></span><br><span class="language-javascript">        <span class="hljs-comment">//       scheduleDetails: [&#x27;常白班总部弹性工时 08:30_17:30&#x27;]</span></span><br><span class="language-javascript">        <span class="hljs-comment">//     &#125;</span></span><br><span class="language-javascript">        <span class="hljs-comment">//   &#125;</span></span><br><span class="language-javascript">        <span class="hljs-comment">// &#125;)</span></span><br><span class="language-javascript">      &#125;</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">  &#125;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>:::</p>
+<h3 id="指定默认月份"><a href="#指定默认月份" class="headerlink" title="指定默认月份"></a>指定默认月份</h3><p>::: tip<br>通过 <code>v-model</code> 可以为组件绑定月份。<br>:::</p>
+<p>:::demo</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">zsc-attendance-calendar</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">&quot;date&quot;</span> <span class="hljs-attr">:data</span>=<span class="hljs-string">&quot;attendanceData&quot;</span> @<span class="hljs-attr">month-change</span>=<span class="hljs-string">&quot;getAttendanceData&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="language-javascript">    <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">      <span class="hljs-keyword">return</span> &#123;</span><br><span class="language-javascript">        <span class="hljs-attr">date</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-number">2022</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>),</span><br><span class="language-javascript"></span><br><span class="language-javascript">        <span class="hljs-attr">attendanceData</span>: &#123;</span><br><span class="language-javascript">          <span class="hljs-string">&#x27;2022-01-01&#x27;</span>: &#123;</span><br><span class="language-javascript">            <span class="hljs-attr">details</span>: [],</span><br><span class="language-javascript">            <span class="hljs-attr">workTime</span>: <span class="hljs-string">&#x27;2021-07-01 08:44&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">offWorkTime</span>: <span class="hljs-string">&#x27;2021-07-01 20:03&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">scheduleDetails</span>: [<span class="hljs-string">&#x27;常白班总部弹性工时 08:30_17:30&#x27;</span>]</span><br><span class="language-javascript">          &#125;</span><br><span class="language-javascript">        &#125;</span><br><span class="language-javascript">      &#125;</span><br><span class="language-javascript">    &#125;,</span><br><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-attr">methods</span>: &#123;</span><br><span class="language-javascript">      <span class="hljs-title function_">getAttendanceData</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">        <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;</span><br><span class="language-javascript">          <span class="hljs-variable language_">this</span>.<span class="hljs-property">attendanceData</span> = &#123;</span><br><span class="language-javascript">            <span class="hljs-string">&#x27;2022-01-02&#x27;</span>: &#123;</span><br><span class="language-javascript">              <span class="hljs-attr">details</span>: [],</span><br><span class="language-javascript">              <span class="hljs-attr">workTime</span>: <span class="hljs-string">&#x27;2021-07-01 08:44&#x27;</span>,</span><br><span class="language-javascript">              <span class="hljs-attr">offWorkTime</span>: <span class="hljs-string">&#x27;2021-07-01 20:03&#x27;</span>,</span><br><span class="language-javascript">              <span class="hljs-attr">scheduleDetails</span>: [<span class="hljs-string">&#x27;常白班总部弹性工时 08:30_17:30&#x27;</span>]</span><br><span class="language-javascript">            &#125;</span><br><span class="language-javascript">          &#125;</span><br><span class="language-javascript">        &#125;)</span><br><span class="language-javascript">      &#125;</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">  &#125;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>:::</p>
+<h3 id="自定义头部右侧内容"><a href="#自定义头部右侧内容" class="headerlink" title="自定义头部右侧内容"></a>自定义头部右侧内容</h3><p>::: tip<br>通过设置名为 <code>header-right</code> 的 <code>slot</code> 来自定义日历头部右侧显示的内容。<br>:::</p>
+<p>:::demo</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">zsc-attendance-calendar</span> <span class="hljs-attr">:data</span>=<span class="hljs-string">&quot;attendanceData&quot;</span> @<span class="hljs-attr">month-change</span>=<span class="hljs-string">&quot;getAttendanceData&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">&quot;header-right&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>剩余年假<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>&#123;&#123; annualLeaveDays &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>天，<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>剩余调休<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>&#123;&#123; annualRestDays &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>天<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">zsc-attendance-calendar</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="language-javascript">    <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">      <span class="hljs-keyword">return</span> &#123;</span><br><span class="language-javascript">        <span class="hljs-attr">annualLeaveDays</span>: <span class="hljs-number">5</span>,</span><br><span class="language-javascript">        <span class="hljs-attr">annualRestDays</span>: <span class="hljs-number">6</span>,</span><br><span class="language-javascript"></span><br><span class="language-javascript">        <span class="hljs-attr">attendanceData</span>: &#123;</span><br><span class="language-javascript">          <span class="hljs-string">&#x27;2022-01-01&#x27;</span>: &#123;</span><br><span class="language-javascript">            <span class="hljs-attr">details</span>: [],</span><br><span class="language-javascript">            <span class="hljs-attr">workTime</span>: <span class="hljs-string">&#x27;2021-07-01 08:44&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">offWorkTime</span>: <span class="hljs-string">&#x27;2021-07-01 20:03&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">scheduleDetails</span>: [<span class="hljs-string">&#x27;常白班总部弹性工时 08:30_17:30&#x27;</span>]</span><br><span class="language-javascript">          &#125;</span><br><span class="language-javascript">        &#125;</span><br><span class="language-javascript">      &#125;</span><br><span class="language-javascript">    &#125;,</span><br><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-attr">methods</span>: &#123;</span><br><span class="language-javascript">      <span class="hljs-title function_">getAttendanceData</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">        <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;</span><br><span class="language-javascript">          <span class="hljs-variable language_">this</span>.<span class="hljs-property">attendanceData</span> = &#123;</span><br><span class="language-javascript">            <span class="hljs-string">&#x27;2022-01-02&#x27;</span>: &#123;</span><br><span class="language-javascript">              <span class="hljs-attr">details</span>: [],</span><br><span class="language-javascript">              <span class="hljs-attr">workTime</span>: <span class="hljs-string">&#x27;2021-07-01 08:44&#x27;</span>,</span><br><span class="language-javascript">              <span class="hljs-attr">offWorkTime</span>: <span class="hljs-string">&#x27;2021-07-01 20:03&#x27;</span>,</span><br><span class="language-javascript">              <span class="hljs-attr">scheduleDetails</span>: [<span class="hljs-string">&#x27;常白班总部弹性工时 08:30_17:30&#x27;</span>]</span><br><span class="language-javascript">            &#125;</span><br><span class="language-javascript">          &#125;</span><br><span class="language-javascript">        &#125;)</span><br><span class="language-javascript">      &#125;</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">  &#125;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>:::</p>
+<h3 id="隐藏头部"><a href="#隐藏头部" class="headerlink" title="隐藏头部"></a>隐藏头部</h3><p>::: tip<br>通过指定 <code>show-header</code> 为 <code>false</code> 可以隐藏组件头部。<br>:::</p>
+<p>:::demo</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">zsc-attendance-calendar</span> <span class="hljs-attr">:show-header</span>=<span class="hljs-string">&quot;false&quot;</span> <span class="hljs-attr">:data</span>=<span class="hljs-string">&quot;attendanceData&quot;</span> @<span class="hljs-attr">month-change</span>=<span class="hljs-string">&quot;getAttendanceData&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="language-javascript">    <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">      <span class="hljs-keyword">return</span> &#123;</span><br><span class="language-javascript">        <span class="hljs-attr">attendanceData</span>: &#123;</span><br><span class="language-javascript">          <span class="hljs-string">&#x27;2022-01-01&#x27;</span>: &#123;</span><br><span class="language-javascript">            <span class="hljs-attr">details</span>: [],</span><br><span class="language-javascript">            <span class="hljs-attr">workTime</span>: <span class="hljs-string">&#x27;2021-07-01 08:44&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">offWorkTime</span>: <span class="hljs-string">&#x27;2021-07-01 20:03&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">scheduleDetails</span>: [<span class="hljs-string">&#x27;常白班总部弹性工时 08:30_17:30&#x27;</span>]</span><br><span class="language-javascript">          &#125;</span><br><span class="language-javascript">        &#125;</span><br><span class="language-javascript">      &#125;</span><br><span class="language-javascript">    &#125;,</span><br><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-attr">methods</span>: &#123;</span><br><span class="language-javascript">      <span class="hljs-title function_">getAttendanceData</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">        <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;</span><br><span class="language-javascript">          <span class="hljs-variable language_">this</span>.<span class="hljs-property">attendanceData</span> = &#123;</span><br><span class="language-javascript">            <span class="hljs-string">&#x27;2022-01-02&#x27;</span>: &#123;</span><br><span class="language-javascript">              <span class="hljs-attr">details</span>: [],</span><br><span class="language-javascript">              <span class="hljs-attr">workTime</span>: <span class="hljs-string">&#x27;2021-07-01 08:44&#x27;</span>,</span><br><span class="language-javascript">              <span class="hljs-attr">offWorkTime</span>: <span class="hljs-string">&#x27;2021-07-01 20:03&#x27;</span>,</span><br><span class="language-javascript">              <span class="hljs-attr">scheduleDetails</span>: [<span class="hljs-string">&#x27;常白班总部弹性工时 08:30_17:30&#x27;</span>]</span><br><span class="language-javascript">            &#125;</span><br><span class="language-javascript">          &#125;</span><br><span class="language-javascript">        &#125;)</span><br><span class="language-javascript">      &#125;</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">  &#125;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>:::</p>
+<h3 id="指定考勤类型颜色"><a href="#指定考勤类型颜色" class="headerlink" title="指定考勤类型颜色"></a>指定考勤类型颜色</h3><p>::: tip<br>通过指定 <code>option</code> 属性里的 <code>color</code> 字段可以自定义考勤类型颜色。<br>:::</p>
+<p>::: warning<br>颜色值只能是十六进制色值！<br>:::</p>
+<p>:::demo</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">zsc-attendance-calendar</span> <span class="hljs-attr">:data</span>=<span class="hljs-string">&quot;attendanceData&quot;</span> <span class="hljs-attr">:option</span>=<span class="hljs-string">&quot;option&quot;</span> @<span class="hljs-attr">month-change</span>=<span class="hljs-string">&quot;getAttendanceData&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="language-javascript">    <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">      <span class="hljs-keyword">return</span> &#123;</span><br><span class="language-javascript">        <span class="hljs-attr">attendanceData</span>: &#123;</span><br><span class="language-javascript">          <span class="hljs-string">&#x27;2022-07-21&#x27;</span>: &#123;</span><br><span class="language-javascript">            <span class="hljs-attr">details</span>: [&#123; <span class="hljs-attr">attendanceType</span>: <span class="hljs-string">&#x27;休假&#x27;</span>, <span class="hljs-attr">attendanceTypeDesValue</span>: <span class="hljs-string">&#x27;8:00&#x27;</span>, <span class="hljs-attr">attendanceTypeDes</span>: <span class="hljs-string">&#x27;L-前半年调休假&#x27;</span> &#125;],</span><br><span class="language-javascript">            <span class="hljs-attr">workTime</span>: <span class="hljs-string">&#x27;undefined&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">offWorkTime</span>: <span class="hljs-string">&#x27;undefined&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">scheduleDetails</span>: []</span><br><span class="language-javascript">          &#125;</span><br><span class="language-javascript">        &#125;,</span><br><span class="language-javascript"></span><br><span class="language-javascript">        <span class="hljs-attr">option</span>: [</span><br><span class="language-javascript">          &#123;</span><br><span class="language-javascript">            <span class="hljs-attr">tag</span>: <span class="hljs-string">&#x27;休假&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;#0ae0ae&#x27;</span></span><br><span class="language-javascript">          &#125;</span><br><span class="language-javascript">        ]</span><br><span class="language-javascript">      &#125;</span><br><span class="language-javascript">    &#125;,</span><br><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-attr">methods</span>: &#123;</span><br><span class="language-javascript">      <span class="hljs-title function_">getAttendanceData</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">        <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;</span><br><span class="language-javascript">          <span class="hljs-variable language_">this</span>.<span class="hljs-property">attendanceData</span> = &#123;</span><br><span class="language-javascript">            <span class="hljs-string">&#x27;2022-01-02&#x27;</span>: &#123;</span><br><span class="language-javascript">              <span class="hljs-attr">details</span>: [],</span><br><span class="language-javascript">              <span class="hljs-attr">workTime</span>: <span class="hljs-string">&#x27;2021-07-01 08:44&#x27;</span>,</span><br><span class="language-javascript">              <span class="hljs-attr">offWorkTime</span>: <span class="hljs-string">&#x27;2021-07-01 20:03&#x27;</span>,</span><br><span class="language-javascript">              <span class="hljs-attr">scheduleDetails</span>: [<span class="hljs-string">&#x27;常白班总部弹性工时 08:30_17:30&#x27;</span>]</span><br><span class="language-javascript">            &#125;</span><br><span class="language-javascript">          &#125;</span><br><span class="language-javascript">        &#125;)</span><br><span class="language-javascript">      &#125;</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">  &#125;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>:::</p>
+<h3 id="指定考勤类型点击事件"><a href="#指定考勤类型点击事件" class="headerlink" title="指定考勤类型点击事件"></a>指定考勤类型点击事件</h3><p>::: tip<br>通过指定 <code>option</code> 属性里的 <code>events</code> 字段可以自定义考勤类型点击事件。<br>:::</p>
+<p>:::demo</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">zsc-attendance-calendar</span> <span class="hljs-attr">:data</span>=<span class="hljs-string">&quot;attendanceData&quot;</span> <span class="hljs-attr">:option</span>=<span class="hljs-string">&quot;option&quot;</span> @<span class="hljs-attr">month-change</span>=<span class="hljs-string">&quot;getAttendanceData&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="language-javascript">    <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">      <span class="hljs-keyword">return</span> &#123;</span><br><span class="language-javascript">        <span class="hljs-attr">attendanceData</span>: &#123;</span><br><span class="language-javascript">          <span class="hljs-string">&#x27;2022-07-21&#x27;</span>: &#123;</span><br><span class="language-javascript">            <span class="hljs-attr">details</span>: [&#123; <span class="hljs-attr">attendanceType</span>: <span class="hljs-string">&#x27;休假&#x27;</span>, <span class="hljs-attr">attendanceTypeDesValue</span>: <span class="hljs-string">&#x27;8:00&#x27;</span>, <span class="hljs-attr">attendanceTypeDes</span>: <span class="hljs-string">&#x27;L-前半年调休假&#x27;</span> &#125;],</span><br><span class="language-javascript">            <span class="hljs-attr">workTime</span>: <span class="hljs-string">&#x27;undefined&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">offWorkTime</span>: <span class="hljs-string">&#x27;undefined&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">scheduleDetails</span>: []</span><br><span class="language-javascript">          &#125;</span><br><span class="language-javascript">        &#125;,</span><br><span class="language-javascript"></span><br><span class="language-javascript">        <span class="hljs-attr">option</span>: [</span><br><span class="language-javascript">          &#123;</span><br><span class="language-javascript">            <span class="hljs-attr">tag</span>: <span class="hljs-string">&#x27;休假&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;#0ae0ae&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">events</span>: [</span><br><span class="language-javascript">              &#123;</span><br><span class="language-javascript">                <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;按钮文本&#x27;</span>,</span><br><span class="language-javascript">                <span class="hljs-attr">event</span>: <span class="hljs-function">(<span class="hljs-params">row, day, cellValue</span>) =&gt;</span> &#123;</span><br><span class="language-javascript">                  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;row: &#x27;</span>, row)</span><br><span class="language-javascript">                  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;day:&#x27;</span>, day)</span><br><span class="language-javascript">                  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;cellValue:&#x27;</span>, cellValue)</span><br><span class="language-javascript">                &#125;</span><br><span class="language-javascript">              &#125;</span><br><span class="language-javascript">            ]</span><br><span class="language-javascript">          &#125;</span><br><span class="language-javascript">        ]</span><br><span class="language-javascript">      &#125;</span><br><span class="language-javascript">    &#125;,</span><br><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-attr">methods</span>: &#123;</span><br><span class="language-javascript">      <span class="hljs-title function_">getAttendanceData</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">        <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;</span><br><span class="language-javascript">          <span class="hljs-variable language_">this</span>.<span class="hljs-property">attendanceData</span> = &#123;</span><br><span class="language-javascript">            <span class="hljs-string">&#x27;2022-01-02&#x27;</span>: &#123;</span><br><span class="language-javascript">              <span class="hljs-attr">details</span>: [],</span><br><span class="language-javascript">              <span class="hljs-attr">workTime</span>: <span class="hljs-string">&#x27;2021-07-01 08:44&#x27;</span>,</span><br><span class="language-javascript">              <span class="hljs-attr">offWorkTime</span>: <span class="hljs-string">&#x27;2021-07-01 20:03&#x27;</span>,</span><br><span class="language-javascript">              <span class="hljs-attr">scheduleDetails</span>: [<span class="hljs-string">&#x27;常白班总部弹性工时 08:30_17:30&#x27;</span>]</span><br><span class="language-javascript">            &#125;</span><br><span class="language-javascript">          &#125;</span><br><span class="language-javascript">        &#125;)</span><br><span class="language-javascript">      &#125;</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">  &#125;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>:::</p>
+<h3 id="只读模式"><a href="#只读模式" class="headerlink" title="只读模式"></a>只读模式</h3><p>::: tip<br>通过设置 <code>readonly</code> 属性为 <code>true</code> 可以设置组件为只读模式，在该模式下不会触发按钮点击事件。</p>
+<p>该模式一般用于查看下属考勤场景。<br>:::</p>
+<p>:::demo</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">zsc-attendance-calendar</span> <span class="hljs-attr">readonly</span> <span class="hljs-attr">:data</span>=<span class="hljs-string">&quot;attendanceData&quot;</span> <span class="hljs-attr">:option</span>=<span class="hljs-string">&quot;option&quot;</span> @<span class="hljs-attr">month-change</span>=<span class="hljs-string">&quot;getAttendanceData&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="language-javascript">    <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">      <span class="hljs-keyword">return</span> &#123;</span><br><span class="language-javascript">        <span class="hljs-attr">attendanceData</span>: &#123;</span><br><span class="language-javascript">          <span class="hljs-string">&#x27;2022-07-21&#x27;</span>: &#123;</span><br><span class="language-javascript">            <span class="hljs-attr">details</span>: [&#123; <span class="hljs-attr">attendanceType</span>: <span class="hljs-string">&#x27;休假&#x27;</span>, <span class="hljs-attr">attendanceTypeDesValue</span>: <span class="hljs-string">&#x27;8:00&#x27;</span>, <span class="hljs-attr">attendanceTypeDes</span>: <span class="hljs-string">&#x27;L-前半年调休假&#x27;</span> &#125;],</span><br><span class="language-javascript">            <span class="hljs-attr">workTime</span>: <span class="hljs-string">&#x27;undefined&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">offWorkTime</span>: <span class="hljs-string">&#x27;undefined&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">scheduleDetails</span>: []</span><br><span class="language-javascript">          &#125;</span><br><span class="language-javascript">        &#125;,</span><br><span class="language-javascript"></span><br><span class="language-javascript">        <span class="hljs-attr">option</span>: [</span><br><span class="language-javascript">          &#123;</span><br><span class="language-javascript">            <span class="hljs-attr">tag</span>: <span class="hljs-string">&#x27;休假&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;#0ae0ae&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">events</span>: [</span><br><span class="language-javascript">              &#123;</span><br><span class="language-javascript">                <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;按钮文本&#x27;</span>,</span><br><span class="language-javascript">                <span class="hljs-attr">event</span>: <span class="hljs-function">(<span class="hljs-params">row, day, cellValue</span>) =&gt;</span> &#123;</span><br><span class="language-javascript">                  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;row: &#x27;</span>, row)</span><br><span class="language-javascript">                  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;day:&#x27;</span>, day)</span><br><span class="language-javascript">                  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;cellValue:&#x27;</span>, cellValue)</span><br><span class="language-javascript">                &#125;</span><br><span class="language-javascript">              &#125;</span><br><span class="language-javascript">            ]</span><br><span class="language-javascript">          &#125;</span><br><span class="language-javascript">        ]</span><br><span class="language-javascript">      &#125;</span><br><span class="language-javascript">    &#125;,</span><br><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-attr">methods</span>: &#123;</span><br><span class="language-javascript">      <span class="hljs-title function_">getAttendanceData</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">        <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;</span><br><span class="language-javascript">          <span class="hljs-variable language_">this</span>.<span class="hljs-property">attendanceData</span> = &#123;</span><br><span class="language-javascript">            <span class="hljs-string">&#x27;2022-01-02&#x27;</span>: &#123;</span><br><span class="language-javascript">              <span class="hljs-attr">details</span>: [],</span><br><span class="language-javascript">              <span class="hljs-attr">workTime</span>: <span class="hljs-string">&#x27;2021-07-01 08:44&#x27;</span>,</span><br><span class="language-javascript">              <span class="hljs-attr">offWorkTime</span>: <span class="hljs-string">&#x27;2021-07-01 20:03&#x27;</span>,</span><br><span class="language-javascript">              <span class="hljs-attr">scheduleDetails</span>: [<span class="hljs-string">&#x27;常白班总部弹性工时 08:30_17:30&#x27;</span>]</span><br><span class="language-javascript">            &#125;</span><br><span class="language-javascript">          &#125;</span><br><span class="language-javascript">        &#125;)</span><br><span class="language-javascript">      &#125;</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">  &#125;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>:::</p>
+<h3 id="Attributes"><a href="#Attributes" class="headerlink" title="Attributes"></a>Attributes</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>类型</th>
+<th>可选值</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>value &#x2F; v-model</td>
+<td>绑定值, 绑定月份</td>
+<td>Date</td>
+<td>—</td>
+<td>new Date()</td>
+</tr>
+<tr>
+<td>show-header</td>
+<td>是否显示组件头部</td>
+<td>Boolean</td>
+<td>—</td>
+<td>true</td>
+</tr>
+<tr>
+<td>readonly</td>
+<td>是否只读</td>
+<td>Boolean</td>
+<td>—</td>
+<td>false</td>
+</tr>
+<tr>
+<td>data</td>
+<td>考勤数据</td>
+<td>Object</td>
+<td>—</td>
+<td>{}</td>
+</tr>
+<tr>
+<td>option</td>
+<td>考勤类型配置</td>
+<td>Array</td>
+<td>—</td>
+<td><a href="#option-pei-zhi">option 配置</a></td>
+</tr>
+</tbody></table>
+<h3 id="Events"><a href="#Events" class="headerlink" title="Events"></a>Events</h3><table>
+<thead>
+<tr>
+<th>事件名称</th>
+<th>说明</th>
+<th>回调参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>month-change</td>
+<td>选中值发生变化时触发</td>
+<td>目前的选中值（Date）</td>
+</tr>
+<tr>
+<td>row-click</td>
+<td>当某一行被点击时会触发该事件</td>
+<td>day, attendanceData, row, column, event</td>
+</tr>
+<tr>
+<td>cell-click</td>
+<td>当某个单元格被点击时会触发该事件</td>
+<td>day, attendanceData, row, column, cell, event</td>
+</tr>
+</tbody></table>
+<h3 id="option-配置"><a href="#option-配置" class="headerlink" title="option 配置"></a>option 配置</h3><table>
+<thead>
+<tr>
+<th>考勤类型</th>
+<th>默认颜色</th>
+<th>默认事件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>休假</td>
+<td><code style="background: #7ed321;">#7ed321</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>加班</td>
+<td><code style="background: #68d8fd;">#68d8fd</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>值班</td>
+<td><code style="background: #192fa2;">#192fa2</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>出差</td>
+<td><code style="background: #4086ff;">#4086ff</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>迟到</td>
+<td><code style="background: #ffa75d;">#ffa75d</code></td>
+<td><a href="#mo-ren-chi-dao-shi-jian">默认迟到事件</a></td>
+</tr>
+<tr>
+<td>早退</td>
+<td><code style="background: #ffa75d;">#ffa75d</code></td>
+<td><a href="#mo-ren-zao-tui-shi-jian">默认早退事件</a></td>
+</tr>
+<tr>
+<td>旷工</td>
+<td><code style="background: #ffa75d;">#ffa75d</code></td>
+<td><a href="#mo-ren-kuang-gong-shi-jian">默认旷工事件</a></td>
+</tr>
+<tr>
+<td>缺卡</td>
+<td><code style="background: #ff5d5d;">#ff5d5d</code></td>
+<td><a href="#mo-ren-que-qia-shi-jian">默认缺卡事件</a></td>
+</tr>
+<tr>
+<td>补卡</td>
+<td><code style="background: #cf0bba;">#cf0bba</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>事假</td>
+<td><code style="background: #d89634;">#d89634</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>病假</td>
+<td><code style="background: #d89634;">#d89634</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>外勤</td>
+<td><code style="background: #1B0A8B;">#1B0A8B</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>缺日志</td>
+<td><code style="background: #600404;">#600404</code></td>
+<td><a href="#mo-ren-que-ri-zhi-shi-jian">默认缺日志事件</a></td>
+</tr>
+</tbody></table>
+<h4 id="默认迟到事件"><a href="#默认迟到事件" class="headerlink" title="默认迟到事件"></a>默认迟到事件</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">[</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;补卡申请&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>      window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//business-process-pro.zt-express.com/#/mend-card`)</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;请假申请&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>      window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//oa.zto.com/workflow/request/AddRequest.jsp?workflowid=20521`)</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;调休申请&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>      window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//oa.zto.com/workflow/request/AddRequest.jsp?workflowid=20481`)</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="默认早退事件"><a href="#默认早退事件" class="headerlink" title="默认早退事件"></a>默认早退事件</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">[</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;补卡申请&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>      window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//business-process-pro.zt-express.com/#/mend-card`)</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;请假申请&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>      window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//oa.zto.com/workflow/request/AddRequest.jsp?workflowid=20521`)</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;调休申请&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>      window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//oa.zto.com/workflow/request/AddRequest.jsp?workflowid=20481`)</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="默认旷工事件"><a href="#默认旷工事件" class="headerlink" title="默认旷工事件"></a>默认旷工事件</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">[</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;补卡申请&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>      window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//business-process-pro.zt-express.com/#/mend-card`)</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;请假申请&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>      window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//oa.zto.com/workflow/request/AddRequest.jsp?workflowid=20521`)</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;调休申请&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>      window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//oa.zto.com/workflow/request/AddRequest.jsp?workflowid=20481`)</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="默认缺卡事件"><a href="#默认缺卡事件" class="headerlink" title="默认缺卡事件"></a>默认缺卡事件</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">[</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;补卡申请&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>      window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//business-process-pro.zt-express.com/#/mend-card`)</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;请假申请&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>      window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//oa.zto.com/workflow/request/AddRequest.jsp?workflowid=20521`)</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;调休申请&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>      window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//oa.zto.com/workflow/request/AddRequest.jsp?workflowid=20481`)</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="默认缺日志事件"><a href="#默认缺日志事件" class="headerlink" title="默认缺日志事件"></a>默认缺日志事件</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">[</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;补日志&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>      window.open(<br>        `https<span class="hljs-punctuation">:</span><span class="hljs-comment">//e.zto.com/e-task-detail?taskId=undefined&amp;bizNo=undefined&amp;url=https%253A%252F%252Ftaskcenter.zt-express.com%252F%2523%252Fapprove%253FbizType%253DBRZSQD%2526processId%253DProcess165604728197714509&amp;bizChannel=undefined`</span><br>      )<br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="默认-option-全部配置"><a href="#默认-option-全部配置" class="headerlink" title="默认 option 全部配置"></a>默认 option 全部配置</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">[</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;tag&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;休假&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#7ed321&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;events&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;tag&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;加班&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#68d8fd&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;events&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;tag&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;值班&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#192fa2&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;events&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;tag&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;出差&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#4086ff&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;events&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;tag&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;迟到&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#ffa75d&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;events&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>      <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;补卡申请&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>          window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//business-process-pro.zt-express.com/#/mend-card`)</span><br>        <span class="hljs-punctuation">&#125;</span><br>      <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;请假申请&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>          window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//oa.zto.com/workflow/request/AddRequest.jsp?workflowid=20521`)</span><br>        <span class="hljs-punctuation">&#125;</span><br>      <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;调休申请&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>          window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//oa.zto.com/workflow/request/AddRequest.jsp?workflowid=20481`)</span><br>        <span class="hljs-punctuation">&#125;</span><br>      <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">]</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;tag&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;早退&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#ffa75d&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;events&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>      <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;补卡申请&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>          window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//business-process-pro.zt-express.com/#/mend-card`)</span><br>        <span class="hljs-punctuation">&#125;</span><br>      <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;请假申请&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>          window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//oa.zto.com/workflow/request/AddRequest.jsp?workflowid=20521`)</span><br>        <span class="hljs-punctuation">&#125;</span><br>      <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;调休申请&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>          window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//oa.zto.com/workflow/request/AddRequest.jsp?workflowid=20481`)</span><br>        <span class="hljs-punctuation">&#125;</span><br>      <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">]</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;tag&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;旷工&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#ff5d5d&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;events&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>      <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;补卡申请&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>          window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//business-process-pro.zt-express.com/#/mend-card`)</span><br>        <span class="hljs-punctuation">&#125;</span><br>      <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;请假申请&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>          window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//oa.zto.com/workflow/request/AddRequest.jsp?workflowid=20521`)</span><br>        <span class="hljs-punctuation">&#125;</span><br>      <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;调休申请&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>          window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//oa.zto.com/workflow/request/AddRequest.jsp?workflowid=20481`)</span><br>        <span class="hljs-punctuation">&#125;</span><br>      <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">]</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;tag&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;缺卡&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#ff5d5d&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;events&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>      <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;补卡申请&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>          window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//business-process-pro.zt-express.com/#/mend-card`)</span><br>        <span class="hljs-punctuation">&#125;</span><br>      <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;请假申请&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>          window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//oa.zto.com/workflow/request/AddRequest.jsp?workflowid=20521`)</span><br>        <span class="hljs-punctuation">&#125;</span><br>      <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;调休申请&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>          window.open(`https<span class="hljs-punctuation">:</span><span class="hljs-comment">//oa.zto.com/workflow/request/AddRequest.jsp?workflowid=20481`)</span><br>        <span class="hljs-punctuation">&#125;</span><br>      <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">]</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;tag&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;补卡&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#cf0bba&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;events&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;tag&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;事假&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#d89634&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;events&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;tag&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;病假&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#d89634&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;events&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;tag&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;外勤&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#1B0A8B&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;events&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;tag&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;缺日志&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#600404&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;events&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>      <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;补日志&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;event&quot;</span><span class="hljs-punctuation">:</span> (row<span class="hljs-punctuation">,</span> day<span class="hljs-punctuation">,</span> attendanceData) =&gt; <span class="hljs-punctuation">&#123;</span><br>          window.open(<br>            `https<span class="hljs-punctuation">:</span><span class="hljs-comment">//e.zto.com/e-task-detail?taskId=undefined&amp;bizNo=undefined&amp;url=https%253A%252F%252Ftaskcenter.zt-express.com%252F%2523%252Fapprove%253FbizType%253DBRZSQD%2526processId%253DProcess165604728197714509&amp;bizChannel=undefined`</span><br>          )<br>        <span class="hljs-punctuation">&#125;</span><br>      <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">]</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%8E%9F%E5%88%9B/" class="print-no-link">#原创</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>attendance-calendar</div>
+      <div>https://bydongxing.github.io/2023/08/25/attendance-calendar/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Xavier Dong</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年8月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/25/test/" title="测试文章">
+                        <span class="hidden-mobile">测试文章</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
